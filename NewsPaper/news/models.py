@@ -12,7 +12,7 @@ class Author(models.Model):
     rating = models.FloatField(default=0.0)
 
     def __str__(self):
-        return f'{self.author_user.name} {self.rating}'
+        return f'{self.author_user.username} {self.rating}'
 
     def update_rating(self):
         pRat = self.post_set.aggregate(post_rat=Sum('rating'))
