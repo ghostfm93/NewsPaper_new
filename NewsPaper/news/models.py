@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 
 
 class Category(models.Model):
-    category_name = models.CharField(unique=True,max_length=255)
+    category_name = models.CharField(unique=True, max_length=255)
+
+    def __str__(self):
+        return self.category_name
 
 
 class Author(models.Model):
@@ -61,10 +65,16 @@ class Post(models.Model):
     def preview(self):
         return self.text[:123]+'...'
 
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
+
 
 class PostCategory(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.post} {self.category}'
 
 
 class Comment(models.Model):

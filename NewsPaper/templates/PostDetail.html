@@ -12,6 +12,9 @@ Post
            <table>
                <tr>
                <td>{{ post_detail.created | date:'d M Y' }}</td>
-               <td>{{ post_detail.text|censor}}</td>
+               <td>{{ post_detail.text|censor}}
+                   <a href="{{post_detail.id}}/update">Редактировать</a>
+                   <a href="{{post_detail.id}}/delete">Удалить</a>
+               </td>
                </tr>
 {% endblock content %}
